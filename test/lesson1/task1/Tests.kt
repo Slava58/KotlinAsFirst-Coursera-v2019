@@ -82,6 +82,7 @@ class Tests {
         assertEquals(8, thirdDigit(3801))
         assertEquals(1, thirdDigit(100))
         assertEquals(0, thirdDigit(1000))
+        assertEquals(9, thirdDigit(54900))
     }
 
     @Test
