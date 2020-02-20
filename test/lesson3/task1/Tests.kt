@@ -100,6 +100,13 @@ class Tests {
         assertEquals(2089830349, lcm(23579, 88631))
         assertEquals(2022222222, lcm(2, 1011111111))
         assertEquals(2022222222, lcm(1011111111, 2))
+        assertEquals(105, lcm(15, 105))
+        assertEquals(912, lcm(48, 19))
+        var count = 0
+        for (i in 1..400) {
+            if (lcm(2, i) == i) count++
+        }
+        assertEquals(200, count)
     }
 
     @Test
@@ -178,7 +185,12 @@ class Tests {
         assertEquals(0.0, sin(PI, 1e-5), 1e-5)
         assertEquals(-1.0, sin(3.0 * PI / 2.0, 1e-5), 1e-5)
         assertEquals(0.0, sin(100 * PI, 1e-5), 1e-5)
+        assertEquals(0.0, sin(PI, 1e-5), 1e-5)
+        assertEquals(0.5, sin(PI / 6.0, 1e-5), 1e-5)
+        assertEquals(0.0, sin(PI * 2.0, 1e-5), 1e-5)
         assertNotEquals(kotlin.math.sin(1.0), sin(1.0, 1.0))
+        assertEquals(0.64278, sin(PI * 7.0 / 9.0, 1e-5), 1e-5)
+        assertEquals(0.258819045, sin(PI / 12.0, 1e-5), 1e-5)
         assertNotEquals(kotlin.math.sin(-0.5), sin(-0.5, 1.0))
     }
 
@@ -189,7 +201,7 @@ class Tests {
         assertEquals(0.0, cos(PI / 2.0, 1e-5), 1e-5)
         assertEquals(-1.0, cos(PI, 1e-5), 1e-5)
         assertEquals(0.0, cos(3.0 * PI / 2.0, 1e-5), 1e-5)
-        assertEquals(1.0, cos(100 * PI, 1e-5), 1e-5)
+        assertEquals(1.0, cos( 100 * PI, 1e-5), 1e-5)
         assertNotEquals(kotlin.math.cos(1.0), cos(1.0, 1.0))
         assertNotEquals(kotlin.math.cos(0.5), cos(-0.5, 1.0))
     }
