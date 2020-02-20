@@ -213,11 +213,11 @@ fun sin(x: Double, eps: Double): Double {
     do {
         term = signT * newX.pow(number)/ factorial(number)
         sinX += term
-        println("number = $number, term = $term")
+//        println("number = $number, term = $term")
         number += 2
         signT *= -1
     } while (abs(term) > eps)
-    println("sin($x) = $sinX")
+//    println("sin($x) = $sinX")
     return sinX
 }
 
@@ -230,7 +230,23 @@ fun sin(x: Double, eps: Double): Double {
  * Подумайте, как добиться более быстрой сходимости ряда при больших значениях x.
  * Использовать kotlin.math.cos и другие стандартные реализации функции косинуса в этой задаче запрещается.
  */
-fun cos(x: Double, eps: Double): Double = TODO()
+fun cos(x: Double, eps: Double): Double {
+    var number = 2
+    var signT = -1
+    var newX = x
+    if (x > 2.0 * PI) newX = x % (2.0 * PI)
+    var cosX = 1.0
+    var term: Double
+    do {
+        term = signT * newX.pow(number)/ factorial(number)
+        cosX += term
+//        println("number = $number, term = $term")
+        number += 2
+        signT *= -1
+    } while (abs(term) > eps)
+//    println("cos($x) = $cosX")
+    return cosX
+}
 
 /**
  * Средняя
