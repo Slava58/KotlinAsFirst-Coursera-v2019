@@ -87,23 +87,23 @@ fun digitNumber(n: Int): Int {
  * Ряд Фибоначчи определён следующим образом: fib(1) = 1, fib(2) = 1, fib(n+2) = fib(n) + fib(n+1)
  */
 
-fun fib(n: Int): Int {
-    if (n <= 2) return 1
-    else return fib(n - 1) + fib(n - 2)
-}
-
 //fun fib(n: Int): Int {
-//    var fibN = 1
-//    var fibN1 = 1
-//    var fibN2 = 1
-//    if(n <= 2)
-//    else for (i in 3..n){
-//        fibN2 = fibN + fibN1
-//        fibN = fibN1
-//        fibN1 = fibN2
-//    }
-//    return fibN2
+//    if (n <= 2) return 1
+//    else return fib(n - 1) + fib(n - 2)
 //}
+
+fun fib(n: Int): Int {
+    var fibN = 1
+    var fibN1 = 1
+    var fibN2 = 1
+    if(n <= 2) return fibN2
+    else for (i in 3..n){
+        fibN2 = fibN + fibN1
+        fibN = fibN1
+        fibN1 = fibN2
+    }
+    return fibN2
+}
 
 /**
  * Простая
@@ -192,7 +192,16 @@ fun squareBetweenExists(m: Int, n: Int): Boolean {
  * Написать функцию, которая находит, сколько шагов требуется для
  * этого для какого-либо начального X > 0.
  */
-fun collatzSteps(x: Int): Int = TODO()
+fun collatzSteps(x: Int): Int {
+    var count = 0
+    var tempX = x
+    while (tempX != 1) {
+        count++
+        if (tempX % 2 == 0) tempX /= 2
+        else tempX = 3 * tempX + 1
+    }
+    return count
+}
 
 /**
  * Средняя
@@ -211,7 +220,7 @@ fun sin(x: Double, eps: Double): Double {
     var sinX = newX
     var term: Double
     do {
-        term = signT * newX.pow(number)/ factorial(number)
+        term = signT * newX.pow(number) / factorial(number)
         sinX += term
 //        println("number = $number, term = $term")
         number += 2
@@ -238,7 +247,7 @@ fun cos(x: Double, eps: Double): Double {
     var cosX = 1.0
     var term: Double
     do {
-        term = signT * newX.pow(number)/ factorial(number)
+        term = signT * newX.pow(number) / factorial(number)
         cosX += term
 //        println("number = $number, term = $term")
         number += 2
@@ -255,7 +264,16 @@ fun cos(x: Double, eps: Double): Double {
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun revert(n: Int): Int = TODO()
+fun revert(n: Int): Int {
+    var tempN = n
+    var revN = 0
+    while (tempN != 0) {
+        revN += (tempN % 10)
+        if (tempN > 10) revN *= 10
+        tempN /= 10
+    }
+    return revN
+}
 
 /**
  * Средняя
@@ -266,7 +284,16 @@ fun revert(n: Int): Int = TODO()
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun isPalindrome(n: Int): Boolean = TODO()
+fun isPalindrome(n: Int): Boolean {
+    var reversedN = revert(n)
+    var tmpN = n
+    while (tmpN != 0) {
+        if (tmpN % 10 != reversedN % 10) return false
+        reversedN /= 10
+        tmpN /= 10
+    }
+    return true
+}
 
 /**
  * Средняя
@@ -276,18 +303,42 @@ fun isPalindrome(n: Int): Boolean = TODO()
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun hasDifferentDigits(n: Int): Boolean = TODO()
+fun hasDifferentDigits(n: Int): Boolean {
+    var tempN = n
+    val lastDig = tempN % 10
+    while (tempN != 0) {
+        tempN /= 10
+        if (tempN == 0) return false
+        if (lastDig != tempN % 10) return true
+    }
+    return false
+}
 
 /**
  * Сложная
  *
  * Найти n-ю цифру последовательности из квадратов целых чисел:
  * 149162536496481100121144...
+ * 169196225256
  * Например, 2-я цифра равна 4, 7-я 5, 12-я 6.
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun squareSequenceDigit(n: Int): Int = TODO()
+fun squareSequenceDigit(n: Int): Int {
+    var tempN = n
+    var number = 1
+    var tempSqr = 0
+    var tempLength = 0
+    while (tempN > 0) {
+        tempSqr = sqr(number)
+        tempLength = digitNumber(tempSqr)
+        if (tempLength >= tempN) return ((revert(tempSqr) / (pow(10.0,(tempN - 1).toDouble()).toInt())) % 10)
+        number++
+        tempN -= tempLength
+    }
+    return -1
+}
+
 
 /**
  * Сложная
@@ -298,9 +349,21 @@ fun squareSequenceDigit(n: Int): Int = TODO()
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun fibSequenceDigit(n: Int): Int = TODO()
+fun fibSequenceDigit(n: Int): Int {
+    var tempN = n
+    var number = 1
+    var tempFib = 0
+    var tempLength = 0
+    while (tempN > 0) {
+        tempFib = fib(number)
+        tempLength = digitNumber(tempFib)
+        if (tempLength >= tempN) return ((revert(tempFib) / (pow(10.0,(tempN - 1).toDouble()).toInt())) % 10)
+        number++
+        tempN -= tempLength
+    }
+    return -1
+}
 
 fun main() {
-    val x = (PI/6 % PI).toInt()
-    println("$x")
+
 }

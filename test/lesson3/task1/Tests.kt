@@ -216,6 +216,7 @@ class Tests {
         assertEquals(0, revert(0))
         assertEquals(3, revert(3))
         assertEquals(111, revert(111))
+        assertEquals(28, revert(82))
         assertEquals(17571, revert(17571))
         assertEquals(123456789, revert(987654321))
     }
@@ -227,6 +228,11 @@ class Tests {
         assertFalse(isPalindrome(3653))
         assertTrue(isPalindrome(15751))
         assertTrue(isPalindrome(24688642))
+        assertTrue(isPalindrome(33))
+        assertTrue(isPalindrome(313))
+        assertTrue(isPalindrome(0))
+        assertTrue(isPalindrome(2281822))
+        assertFalse(isPalindrome(36567563))
     }
 
     @Test
@@ -238,6 +244,8 @@ class Tests {
         assertFalse(hasDifferentDigits(0))
         assertFalse(hasDifferentDigits(777))
         assertTrue(hasDifferentDigits(31122))
+        assertFalse(hasDifferentDigits(222222222))
+        assertTrue(hasDifferentDigits(3330333))
     }
 
     @Test
