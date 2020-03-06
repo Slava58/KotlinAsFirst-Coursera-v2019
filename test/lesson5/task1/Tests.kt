@@ -209,6 +209,10 @@ class Tests {
             mapOf("MSFT" to 150.0, "NFLX" to 45.0),
             averageStockPrice(listOf("MSFT" to 100.0, "MSFT" to 200.0, "NFLX" to 40.0, "NFLX" to 50.0))
         )
+        assertEquals(
+            mapOf("MSFT" to 150.0, "NFLX" to 45.0, "GGL" to 340.0),
+            averageStockPrice(listOf("GGL" to 340.0, "MSFT" to 100.0, "MSFT" to 200.0, "NFLX" to 40.0, "NFLX" to 50.0))
+        )
     }
 
     @Test
@@ -227,6 +231,20 @@ class Tests {
                 "печенье"
             )
         )
+        assertEquals(
+            "Агафья",
+            findCheapestStuff(
+                mapOf("Мария" to ("печенье" to 20.0), "Орео" to ("печенье" to 100.0), "Орео" to ("кизил" to 100.0), "Агафья" to ("печенье" to 10.7)),
+                "печенье"
+            )
+        )
+        assertEquals(
+            "Орео",
+            findCheapestStuff(
+                mapOf("Мария" to ("печенье" to 20.0), "Орео" to ("печенье" to 100.0), "Орео" to ("кизил" to 100.0), "Агафья" to ("печенье" to 10.7)),
+                "кизил"
+            )
+        )
     }
 
     @Test
@@ -235,6 +253,7 @@ class Tests {
         assertFalse(canBuildFrom(emptyList(), "foo"))
         assertTrue(canBuildFrom(listOf('a', 'b', 'o'), "baobab"))
         assertFalse(canBuildFrom(listOf('a', 'm', 'r'), "Marat"))
+        assertTrue(canBuildFrom(listOf('a', 'b', 'o'), "babab"))
     }
 
     @Test
@@ -251,6 +270,10 @@ class Tests {
         assertEquals(
             emptyMap<String, Int>(),
             extractRepeats(listOf("a", "b", "c"))
+        )
+        assertEquals(
+            mapOf("a" to 2, "b" to 3),
+            extractRepeats(listOf("a", "b", "a", "b", "b", "c", "d"))
         )
     }
 
