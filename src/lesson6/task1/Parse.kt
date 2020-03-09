@@ -69,7 +69,21 @@ fun main() {
  * Обратите внимание: некорректная с точки зрения календаря дата (например, 30.02.2009) считается неверными
  * входными данными.
  */
-fun dateStrToDigit(str: String): String = TODO()
+fun dateStrToDigit(str: String): String {
+    var listStr = str.split(" ")
+    var tempStr = ""
+    var month: Int
+    if (listStr.size != 3) return tempStr
+    var day: Int = listStr[0].toInt()
+    var year: Int = listStr[2].toInt()
+    var daysInMonth = mutableMapOf<String, Int>("января" to 31, "февраля" to 28, "марта" to 31, "апреля" to 30, "мая" to 31, "июня" to 30, "июля" to 31, "августа" to 31, "сентября" to 30, "октября" to 31, "ноября" to 30, "декабря" to 31)
+    if(daysInMonth[listStr[1]] == null) return tempStr
+    if (year % 400 == 0 || ((year % 100 != 0) && (year % 4 == 0))) daysInMonth["февраль"] = 29
+    if((day <= 0) || (day > daysInMonth[listStr[1]]!!)) return tempStr
+    month = listOf(daysInMonth.keys)[0].indexOf(listStr[1]) + 1
+    tempStr = String.format("%02d.%02d.%4d", day, month, year)
+    return tempStr
+}
 
 /**
  * Средняя
